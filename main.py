@@ -39,7 +39,3 @@ def ping_serv():
         last_post.append(request.values)
 
     return str(last_post)
-
-
-if __name__ == '__main__':
-    socketio.run(app, port=5001, allow_unsafe_werkzeug=True)
