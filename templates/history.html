@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PackMon - History</title>
+</head>
+<body>
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        let socket = io()
+
+        socket.on('connect', function() {
+            console.log('my_event', {data: 'I\'m connected!'})
+        })
+
+        socket.on('event', function(msg) {
+            console.log(msg.data)
+
+            let table = document.getElementById('eventtable')
+            table.textContent = ''
+
+            for(row of msg.data){
+                let startTime = document.createElement('th')
+                startTime.innerHTML = row[0]
+
+                let duration = document.createElement('td')
+                duration.innerHTML = row[1]
+
+                let tr = document.createElement('tr')
+                tr.appendChild(startTime)
+                tr.appendChild(duration)
+                table.appendChild(tr)
+            }
+        });
+    </script>
+
+    <table id="eventtable">
+        {% for time, dur in events %}
+
+        <tr>
+           <th> {{ time }} </th>
+           <td> {{ dur }} </td>
+        </tr>
+
+        {% endfor %}
+    </table>
+</body>
+</html>
