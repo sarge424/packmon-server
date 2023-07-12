@@ -48,5 +48,3 @@ def image_show(url):
 
     return '404 - Not Found...'
 
-if __name__ == '__main__':
-    app.run(port=5007)
